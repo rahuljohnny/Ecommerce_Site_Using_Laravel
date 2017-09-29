@@ -31,3 +31,10 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'], function()
         return view('admin.index');
     })->name('admin.index');
 });
+
+
+//panditi a bit
+Route::get('/admin/product/create','ProductsController@create');
+Route::post('/admin/product/store','ProductsController@store');
+Route::get('/admin/product/index','ProductsController@index');
+
