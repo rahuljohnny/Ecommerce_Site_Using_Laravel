@@ -26,10 +26,10 @@
     <div class="row">
         @forelse($shirts->chunk(4) as $chunk)
             @foreach($chunk as $shirt)
-                <div class="small-3 columns">
+                <div class="small-3 medium-3 large-3 columns">
                     <div class="item-wrapper">
                         <div class="img-wrapper">
-                            <a class="button expanded add-to-cart">
+                            <a href="{{route('cart.edit',$shirt->id)}}" class="button expanded add-to-cart">
                                 Add to Cart
                             </a>
                             <a href="#">

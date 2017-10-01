@@ -1,12 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Category;
+use App\Product;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 
-
-class CategoriesController extends Controller
+class CartController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,8 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
-        return view('admin.category.index',compact('categories'));
+        $cartItems = Cart::content();
+        return view('cart.index',compact('cartItems'));
     }
 
     /**
@@ -26,7 +25,7 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -37,15 +36,7 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        //$formInput2 = $request->all();
-
-        //$cat = new \App\Category;
-        //$cat->name = request('name');
-
-        //$cat->save();
-
-        Category::create($request->all()); //It will save all the Categories
-        return back();
+        //
     }
 
     /**
@@ -56,27 +47,7 @@ class CategoriesController extends Controller
      */
     public function show($id)
     {
-        $products = Category::find($id)->products;
-        $categories = Category::all();
-        return view('admin.category.index',compact(['categories','products']));
-    }
-
-    public function showIndividualProduct($id)
-    {
-        //$products = Category::find($id)->products;
-        $category = Category::find($id);
-        //$products = $category->id->products;
-
-
-        $categorizedProductsName = \DB::table('products')->where('category_id', $id)->pluck('name');
-        //$titles = DB::table('roles')->pluck('title');
-
-
-
-
-        //echo $productsName->name;
-
-        return view('admin.category.selectedProduct',compact(['category','categorizedProductsName']));
+        //
     }
 
     /**
@@ -87,7 +58,10 @@ class CategoriesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Product::find($id);
+        //Cart::add(['id' => '293ad', 'name' => 'Product 1', 'qty' => 1, 'price' => 9.99, 'options' => ['size' => 'large']]);
+        Cart::add($id,$product->name,1,$product->price,['size' => 'Medi']);
+        return back();
     }
 
     /**
@@ -99,7 +73,8 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Cart::update($id, ['qty'=> $request->qty, 'options' => $request->size]);
+        return back();
     }
 
     /**
@@ -110,6 +85,7 @@ class CategoriesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Cart::remove($id);
+        return back();
     }
 }

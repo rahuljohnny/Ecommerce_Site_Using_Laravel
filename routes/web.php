@@ -11,7 +11,6 @@
 |
 */
 
-
 Route::get('/', 'FrontController@index')->name('home');
 Route::get('/shirts', 'FrontController@shirts')->name('shirts');
 Route::get('/shirt', 'FrontController@shirt')->name('shirt');
@@ -24,7 +23,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/logout', 'auth\LoginController@logout')->name('home');
 
-Route::group(['prefix'=>'admin','middleware'=>'auth'], function()
+Route::group(['prefix'=>'admin','middleware'=>['auth','admin']], function()
 {
     Route::get('/',function ()
     {
@@ -36,5 +35,15 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'], function()
 //panditi a bit
 Route::get('/admin/product/create','ProductsController@create');
 Route::post('/admin/product/store','ProductsController@store');
-Route::get('/admin/product/index','ProductsController@index');
+Route::get('/admin/product/index','ProductsController@index')->name('product.index');
 
+Route::get('/admin/category','CategoriesController@index');
+Route::post('/admin/category/store','CategoriesController@store');
+
+Route::get('/admin/category/{category}' , 'CategoriesController@showIndividualProduct');
+
+
+Route::resource('/cart','CartController');
+
+Route::get('/checkout','CheckoutController@step1');
+Route::get('/shipping-info','CheckoutController@shipping');

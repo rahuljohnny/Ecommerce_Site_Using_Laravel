@@ -39,10 +39,10 @@
 
             <div class="form-group">
                 <label for="category_id">Category:</label>
-                <select class="form-control" id="category_id" name="category_id">  <!--conf -->
+                <select class="form-control" id="category_id" name="category_id" placeholder="Select Category">  <!--conf -->
 
                     @foreach($categories as $category)
-                        <option>{{$category->id}}</option>
+                        <option>{{$category->name}}</option>
                     @endforeach
 
                 </select>

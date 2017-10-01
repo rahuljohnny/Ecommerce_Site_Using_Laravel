@@ -30,10 +30,6 @@ class ProductsController extends Controller
     public function create()
     {
         $categories = Category::all();
-
-
-
-
         return view('admin.product.create',compact('categories'));
     }
 
@@ -96,6 +92,8 @@ class ProductsController extends Controller
             $request->image->storeAs('public/images',$fileName);
 
             $formInput['image'] = $fileName;
+            $id = \DB::table('categories')->where('name', $formInput['category_id'])->value('id');
+            $formInput['category_id'] = $id;
 
 
             //dd(Storage::url($fileName));
