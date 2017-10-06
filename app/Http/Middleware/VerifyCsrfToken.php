@@ -12,6 +12,10 @@ class VerifyCsrfToken extends BaseVerifier
      * @var array
      */
     protected $except = [
-        //
+        //As stripe is protected by itself
+        'stripe/*',
+        '/payment',
     ];
+
+
 }

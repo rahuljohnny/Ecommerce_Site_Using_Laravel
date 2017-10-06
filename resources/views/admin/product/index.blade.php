@@ -23,6 +23,10 @@
                             {{$shirt->name}}
                         </h3>
                     </a>
+                        <h3>
+                            <a href="/admin/category/{{$shirt->category->id}}"> {{count($shirt->category)? $shirt->category->name:"N/A"}}</a>
+                        </h3>
+
                     <h5>
                         {{$shirt->price}}
                     </h5>

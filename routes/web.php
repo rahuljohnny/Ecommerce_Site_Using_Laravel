@@ -29,10 +29,17 @@ Route::group(['prefix'=>'admin','middleware'=>['auth','admin']], function()
     {
         return view('admin.index');
     })->name('admin.index');
+    Route::resource('product','ProductsController');
+    Route::resource('category','CategoriesController');
+
+
+
 });
+Route::resource('/cart','CartController');
+//Route::resource('/address','AddressController');
+Route::post('/address/store','AddressController@store');
 
 
-//panditi a bit
 Route::get('/admin/product/create','ProductsController@create');
 Route::post('/admin/product/store','ProductsController@store');
 Route::get('/admin/product/index','ProductsController@index')->name('product.index');
@@ -43,7 +50,23 @@ Route::post('/admin/category/store','CategoriesController@store');
 Route::get('/admin/category/{category}' , 'CategoriesController@showIndividualProduct');
 
 
-Route::resource('/cart','CartController');
 
-Route::get('/checkout','CheckoutController@step1');
-Route::get('/shipping-info','CheckoutController@shipping');
+Route::get('/cart/add-items/{id}','CartController@addItem')->name('cart.addItem');
+
+//Route::get('/checkout','CheckoutController@step1');
+
+Route::group(['middleware'=>'auth'], function()
+{
+    Route::get('/shipping-info','CheckoutController@shipping');
+});
+
+
+
+Route::get('/payment','CheckoutController@payment')->name('checkout.payment');
+
+Route::post('/payment','CheckoutController@paymentTest')->name('lastStage.payment');
+Route::get('/charge','CheckoutController@chargeAgain')->name('chargeAgain.payment');//TODO: the route is actually 'api/charge'
+
+//Route::get('/charge','CheckoutController@chargeAgain'); //disabled currently
+
+//Route::get('/test', 'FrontController@test');

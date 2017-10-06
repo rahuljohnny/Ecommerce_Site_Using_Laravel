@@ -1,22 +1,16 @@
 @extends('layout.main')
 @section('content')
 
-
-
 <div class="row">
+
     <div class="small-4 small-centered collumns">
-
-
-
 
         <hr><hr>
 
         <h3>Shipping Cart</h3>
         <hr><hr>
 
-
-
-        <form method="POST" action="/checkout/shipping" enctype="multipart/form-data">
+        <form method="POST" action="/address/store" enctype="multipart/form-data">
             {{ csrf_field() }}
 
             <div class="form-group">
@@ -41,21 +35,19 @@
             </div>
 
             <div class="form-group">
-                <label for="country">zip:</label>
+                <label for="country">Country:</label>
                 <input type="text" id="country" name="country" class="form-control" required>
             </div>
 
             <div class="form-group">
-                <label for="phone">zip:</label>
+                <label for="phone">Phone:</label>
                 <input type="text" id="phone" name="phone" class="form-control" required>
             </div>
 
             <div class="form-group">
 
-                <button type="submit" class="button success">Proceed</button>
+                <button type="submit" class="button success">Proceed to Payment</button>
             </div>
-
-
 
         </form>
     </div>

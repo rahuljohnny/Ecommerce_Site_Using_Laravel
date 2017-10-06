@@ -23,4 +23,10 @@ class FrontController extends Controller
     {
         return view('front.shirt');
     }
+
+    public function test()
+    {
+        $shirts = Product::all();
+        return view('front.test',compact('shirts'));
+    }
 }

@@ -16,7 +16,8 @@
   <p>
     @if(!empty($categorizedProductsName))
       <section>
-        <h3>Products</h3>
+        <h3>All the Products of {{$category->name}} category</h3>
+        <hr>
 
         <table class="table table-hover">
           <thead>

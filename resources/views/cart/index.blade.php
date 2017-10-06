@@ -13,10 +13,8 @@
               <th>Qty</th>
               <th>Size</th>
               <th>Action</th>
-
           </tr>
           </thead>
-
 
           <tbody>
           @foreach($cartItems as $cartItem)
@@ -54,9 +52,9 @@
           <tr>
               <td></td>
               <td>
-                  Total: ${{Cart::total()}}<hr>
                   Tax: ${{Cart::tax()}}<hr>
                   SubTotal: {{Cart::total()}}
+
               </td>
               <td>Items: {{Cart::count()}}</td>
               <td></td>
@@ -70,7 +68,9 @@
 
       </table>
 
-      <a href="/checkout" class="button">Checkout</a>
+      @if(Cart::total()>0)
+          <a href="/shipping-info" class="button">Checkout</a>
+      @endif
   </div>
 
 @endsection

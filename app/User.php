@@ -31,4 +31,17 @@ class User extends Authenticatable
     {
         return $this->admin;
     }
+
+    public function address()
+    {
+        //return $this->hasMany('App\Product');  It can be written as-
+        return $this->hasMany(Address::class); //ctrl + click on the class to access the class
+    }
+
+    public function orders()
+    {
+        //return $this->hasMany('App\Product');  It can be written as-
+        return $this->hasMany(Order::class); //ctrl + click on the class to access the class
+    }
+
 }
