@@ -3,9 +3,6 @@
 namespace App\Mail;
 
 use App\Order;
-use Illuminate\Foundation\Auth\User;
-
-
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -22,6 +19,7 @@ class OrderShipped extends Mailable
      */
     protected $order;
     protected $userInfo;
+
     public function __construct(Order $order)
     {
         $this->order = $order;
@@ -35,7 +33,6 @@ class OrderShipped extends Mailable
      */
     public function build()
     {
-
-        return $this->view('emails.email-shipped')->with(['order'=>$this->order,'userInfo'=>$this->userInfo]);
+        return $this->markdown('emails.orders.shipped')->with(['order'=>$this->order,'userInfo'=>$this->userInfo]);
     }
 }
