@@ -12,7 +12,12 @@ class Order extends Model
     protected $fillable = ['total','delivered'];
     public function orderItems()
     {
-        return $this->belongsToMany(Product::class)->withPivot('qty', 'total');;
+        return $this->belongsToMany(Product::class)->withPivot('qty', 'total');
+    }
+
+    public function user() //function name should follow model name
+    {
+        return $this->belongsTo(User::class);
     }
 
     public static function createOrder()

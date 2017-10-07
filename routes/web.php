@@ -11,6 +11,9 @@
 |
 */
 
+use App\Http\Controllers\OrderController;
+use Illuminate\Support\Facades\Route;
+
 Route::get('/', 'FrontController@index')->name('home');
 Route::get('/shirts', 'FrontController@shirts')->name('shirts');
 Route::get('/shirt', 'FrontController@shirt')->name('shirt');
@@ -31,8 +34,10 @@ Route::group(['prefix'=>'admin','middleware'=>['auth','admin']], function()
     })->name('admin.index');
     Route::resource('product','ProductsController');
     Route::resource('category','CategoriesController');
+    Route::get('orders/{type?}','OrderController@Orders');
 
-
+    Route::post('toggledeliver/{orderId}','OrderController@toggledeliver')->name('toggle.deliver');
+    Route::post('toggledeliver/undo/{orderId}','OrderController@toggleUnoDeliver')->name('toggle.undoDeliver');
 
 });
 Route::resource('/cart','CartController');
