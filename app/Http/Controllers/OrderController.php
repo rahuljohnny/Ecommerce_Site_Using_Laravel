@@ -36,7 +36,7 @@ class OrderController extends Controller
 
          //$userInfo = User::where('id',$order->user_id)->get();
 
-         Mail::to('bogarokon@msn.com')->send(new OrderShipped($order));
+         Mail::to($order->user)->send(new OrderShipped($order));
          return back();
      }
 
