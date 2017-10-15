@@ -15,8 +15,12 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
-        return view('admin.category.index',compact('categories'));
+
+        $categories=Category::all()->groupBy('parent_id');
+        $categories['root']=$categories[0];
+
+        unset($categories[0]);
+        return view('admin.category.index',compact(['categories','products']));
     }
 
     /**
@@ -39,12 +43,13 @@ class CategoriesController extends Controller
     {
         //$formInput2 = $request->all();
 
-        //$cat = new \App\Category;
-        //$cat->name = request('name');
+        $cat = new \App\Category;
+        $cat->name = request('name');
+        $cat->parent_id = request('parent_id');
 
-        //$cat->save();
+        $cat->save();
 
-        Category::create($request->all()); //It will save all the Categories
+        //Category::create($request->all()); //It will save all the Categories but not working in that case
         return back();
     }
 

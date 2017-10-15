@@ -34,6 +34,9 @@ Route::group(['prefix'=>'admin','middleware'=>['auth','admin']], function()
     })->name('admin.index');
     Route::resource('product','ProductsController');
     Route::resource('category','CategoriesController');
+
+    Route::get('admin/category/show/{id}','CategoriesController@show')->name('category.show');
+
     Route::get('orders/{type?}','OrderController@Orders');
 
     Route::post('toggledeliver/{orderId}','OrderController@toggledeliver')->name('toggle.deliver');
@@ -50,7 +53,8 @@ Route::post('/admin/product/store','ProductsController@store');
 Route::get('/admin/product/index','ProductsController@index')->name('product.index');
 
 Route::get('/admin/category','CategoriesController@index');
-Route::post('/admin/category/store','CategoriesController@store');
+Route::post('/admin/category/store','CategoriesController@store')->name('category.store');
+
 
 Route::get('/admin/category/{category}' , 'CategoriesController@showIndividualProduct');
 
