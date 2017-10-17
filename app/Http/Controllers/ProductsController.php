@@ -119,7 +119,7 @@ class ProductsController extends Controller
         Product::create($formInput); //It will save all the products
 
         session()->flash( //The js is not working as I...
-            'message','Post is published!!'
+            'message','Product is published!!'
         );
         //Then redirect to the index of admin
         //return redirect('admin.index');

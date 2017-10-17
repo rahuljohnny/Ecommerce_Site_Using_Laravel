@@ -3,7 +3,6 @@
 \*------------------------------------*/
 *{ margin:0; padding:0; }
 html{
-    padding:5%;
     font:1em/1.5 Georgia, serif;
     overflow-y:scroll;
 }
@@ -132,7 +131,7 @@ a{
 .site-nav a{
     line-height:1;
     padding:1em;
-    background-color:#09f;
+    background-color: #415236;
     color:#fff;
     white-space:nowrap;
 }

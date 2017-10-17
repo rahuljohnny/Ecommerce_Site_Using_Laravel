@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Product;
 use Illuminate\Http\Request;
 
 
@@ -22,6 +23,17 @@ class CategoriesController extends Controller
         unset($categories[0]);
         return view('admin.category.index',compact(['categories','products']));
     }
+
+    public function categorized($category_id)
+    {
+        $categoriezedProducts = Product::categorizedProducts($category_id);
+        //$archives = Post::archives();
+        //dd($categoriezedProducts);
+
+
+        return view('navAdditionalFiles.selectedCategory',compact('categoriezedProducts'));
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -65,6 +77,8 @@ class CategoriesController extends Controller
         $categories = Category::all();
         return view('admin.category.index',compact(['categories','products']));
     }
+
+
 
     public function showIndividualProduct($id)
     {

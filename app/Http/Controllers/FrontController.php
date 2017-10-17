@@ -11,13 +11,13 @@ class FrontController extends Controller
 {
     public function index()
     {
-        $shirts = Product::all();
+        $products = Product::all();
 
         $categories = Category::all()->groupBy('parent_id');
         $categories['root'] = $categories[0];
         unset($categories[0]);
 
-        return view('front.home',compact('shirts','categories'));
+        return view('front.home',compact('products','categories'));
     }
     public function shirts()
     {
@@ -25,9 +25,9 @@ class FrontController extends Controller
         //$url = Storage::url('')
         return view('front.shirts',compact('shirts'));
     }
-    public function shirt()
+    public function shirt(Product $shirt)
     {
-        return view('front.shirt');
+        return view('front.shirt',compact('shirt'));
     }
 
     public function test()

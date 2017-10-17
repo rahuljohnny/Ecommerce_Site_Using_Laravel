@@ -6,7 +6,6 @@
 
     <div class="row" >
         @forelse($shirts as $shirt)
-
             <div class="small-3 medium-3 large-3 columns">
                 <div class="item-wrapper">
                     <div class="img-wrapper">
@@ -17,7 +16,7 @@
                             <img src="{{url('storage/images',$shirt->image)}}"/>
                         </a>
                     </div>
-                    <a href="{{route('shirt')}}">
+                    <a href="shirts/{{$shirt->id}}">
                         <h3>
                             {{$shirt->name}}
                         </h3>

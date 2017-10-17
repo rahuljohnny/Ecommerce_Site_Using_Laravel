@@ -16,15 +16,18 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'FrontController@index')->name('home');
 Route::get('/shirts', 'FrontController@shirts')->name('shirts');
-Route::get('/shirt', 'FrontController@shirt')->name('shirt');
+Route::get('/shirts/{shirt}', 'FrontController@shirt')->name('shirt');
+Route::get('/category/shirts/{shirt}', 'FrontController@shirt');
+
+
 
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index');
 
 
-Route::get('/logout', 'auth\LoginController@logout')->name('home');
+Route::get('/logout', 'auth\LoginController@logout');
 
 Route::group(['prefix'=>'admin','middleware'=>['auth','admin']], function()
 {
@@ -78,4 +81,4 @@ Route::get('/charge','CheckoutController@chargeAgain')->name('chargeAgain.paymen
 
 //Route::get('/charge','CheckoutController@chargeAgain'); //disabled currently
 
-//Route::get('/test', 'FrontController@test');
+Route::get('/category/{itemId}', 'CategoriesController@categorized');
